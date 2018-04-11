@@ -61,8 +61,6 @@ steps:
     in:
       fastqs_in:
         source: fastqs_in
-      output_fq:
-        source: output_fq
     out: [report_json, ifastq_out]
     run: cgp-seqval-qc_pairs_1.cwl
 
