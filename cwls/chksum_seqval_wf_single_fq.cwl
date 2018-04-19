@@ -9,13 +9,12 @@ label: "CGP checksum and interleave fastq generation workflow"
 cwlVersion: v1.0
 
 requirements:
-  - class: ScatterFeatureRequirement
+  - class: StepInputExpressionRequirement
+  - class: InlineJavascriptRequirement
 
 inputs:
-  fastqs_in:
-    type:
-      type: array
-      items: File
+  fastq_in:
+    type: File
     format: edam:format_1930
     doc: "Fastq files to import, can be gzipped."
 
@@ -25,17 +24,12 @@ inputs:
 
 outputs:
   chksum_json:
-    type:
-      type: array
-      items: File
+    type: File
     format: edam:format_3464
     outputSource: chksum/chksum_json
 
   chksum_post_server_response:
-    type:
-      - "null"
-      - type: array
-        items: File
+    type: ["null", File]
     outputSource: chksum/post_server_response
 
   interleave_report_json:
@@ -44,34 +38,46 @@ outputs:
     outputSource: interleave/report_json
 
   interleave_ifastq_out:
-    type: ["null", File]
+    type: File
     format: edam:format_1930
-    outputSource: interleave/ifastq_out
+    outputSource: rename/outfile
 
 steps:
+  rename:
+    in:
+      srcfile:
+        source: fastq_in
+      newname:
+        source: fastq_in
+        valueFrom: $(self.nameroot).fq.gz
+    out: [outfile]
+    run: rename.cwl
+
   chksum:
     in:
       in_file:
-        source: fastqs_in
+        source: rename/outfile
+      post_address:
+        source: post_address
     out: [chksum_json, post_server_response]
-    scatter: [in_file]
     run: cgp-chksum.cwl
 
   interleave:
     in:
       fastqs_in:
-        source: fastqs_in
-    out: [report_json, ifastq_out]
+        source: rename/outfile
+        valueFrom: ${ return [ self ]; }
+    out: [report_json]
     run: cgp-seqval-qc_pairs_1.cwl
 
 doc: |
-    A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
+  A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
 
 $namespaces:
-    s: http://schema.org/
+  s: http://schema.org/
 
 s:codeRepository: https://github.com/cancerit/workflow-seq-import
 s:license: https://spdx.org/licenses/AGPL-3.0

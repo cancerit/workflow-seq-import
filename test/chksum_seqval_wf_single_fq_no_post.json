@@ -1,0 +1,18 @@
+{
+  "fastq_in": {
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_interleaved.fq.gz",
+    "class": "File"
+  },
+  "chksum_json": {
+    "path":"/tmp/chksum_fq_inter_result.json",
+    "class": "File"
+  },
+  "interleave_report_json": {
+    "path":"/tmp/interleaved.report.json",
+    "class": "File"
+  },
+  "interleave_ifastq_out": {
+    "path":"/tmp/interleaved.fq.gz",
+    "class": "File"
+  }
+}
