@@ -5,17 +5,16 @@ Dockstore workflows to import sequencing files
 [![Build Status](https://travis-ci.org/cancerit/workflow-seq-import.svg?branch=master)](https://travis-ci.org/cancerit/workflow-seq-import) : master
 [![Build Status](https://travis-ci.org/cancerit/workflow-seq-import.svg?branch=develop)](https://travis-ci.org/cancerit/workflow-seq-import) : develop
 
-
 ## Workflows
 
 ### chksum_seqval_wf_single_fq.cwl
 
-**Inputs:**
+#### Inputs
 
 * `fastq_in` - An interleaved FastQ file.
 * `post_address` - An URL to send checksum results to via POST. Optional.
 
-**Outputs:**
+#### Outputs
 
 * `chksum_json` - A file with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_post_server_response` - POST server response in a text file. Optional, if no `post_address` is given.
@@ -24,12 +23,12 @@ Dockstore workflows to import sequencing files
 
 ### chksum_seqval_wf_pair_fq.cwl
 
-**Inputs:**
+#### Inputs
 
 * `fastq_in` - A **list** of two FastQ files.
 * `post_address` - A **list** of two URLs to send checksum results of coresponding FasetQ to via POST. It's required and **NOT** optional, but two empty strings can be used if no POST is required.
 
-**Outputs:**
+#### Outputs
 
 * `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_post_server_response` - A list of two text files. Each has POST server response of one of the `fastq_in`. Optional if empty `post_address` was used.
