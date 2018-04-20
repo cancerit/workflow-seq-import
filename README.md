@@ -21,7 +21,7 @@ Dockstore workflows to import sequencing files
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
 
-### chksum_seqval_wf_pair_fq.cwl
+### chksum_seqval_wf_paired_fq.cwl
 
 #### Inputs
 
