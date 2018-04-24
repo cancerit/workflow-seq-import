@@ -22,7 +22,7 @@ inputs:
     type: string?
     doc: "Optional POST address to send JSON results of checksums"
 
-  post_header:
+  post_headers:
     type: string[]?
     doc: "Optional headers to send with JSON results"
 
@@ -63,8 +63,8 @@ steps:
         source: rename/outfile
       post_address:
         source: post_address
-      post_header:
-        source: post_header
+      post_headers:
+        source: post_headers
     out: [chksum_json, post_server_response]
     run: cgp-chksum.cwl
 

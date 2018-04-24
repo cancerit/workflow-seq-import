@@ -24,7 +24,7 @@ These workflows were built based on existing tools below:
 
 * `fastq_in` - An interleaved FastQ file.
 * `post_address` - An URL to send checksum results to via POST. Optional.
-* `post_header` - A list of headers to send with the checksum results to via POST. Optional.
+* `post_headers` - A list of headers to send with the checksum results to via POST. Optional.
 
 #### Outputs
 
@@ -39,7 +39,7 @@ These workflows were built based on existing tools below:
 
 * `fastq_in` - A **list** of two FastQ files.
 * `post_address` - A **list** of two URLs to send checksum results of coresponding FasetQ to via POST. It's required and **NOT** optional, but two empty strings can be used if no POST is required.
-* `post_header` - A list of headers to send with the checksum results to via POST. Optional.
+* `post_headers` - A list of headers to send with the checksum results to via POST. Optional.
 
 #### Outputs
 

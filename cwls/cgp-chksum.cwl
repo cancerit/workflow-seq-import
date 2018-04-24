@@ -35,7 +35,7 @@ inputs:
       separate: true
       shellQuote: true
 
-  post_header:
+  post_headers:
     type:
       - "null"
       - type: array
