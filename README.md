@@ -69,7 +69,7 @@ Examples included in this repository.
 
 1. `examples/chksum_seqval_wf_paired_fq_with_headers.json`
   * A list of headers is in the input.
-  * All headers will be used in every POST request. 
+  * All headers will be used in every POST request.
 
 1. `examples/chksum_seqval_wf_paired_fq_no_post.json`
   * A pair if read 1/2 gzipped fastq files are presented as input.
