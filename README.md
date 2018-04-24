@@ -7,12 +7,24 @@ Dockstore workflows to import sequencing files
 
 ## Workflows
 
+These workflow were built based on existing tools below:
+
+[dockstore-cgp-seqval](https://github.com/cancerit/dockstore-cgp-seqval)
+[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-seqval.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-seqval) : master
+[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-seqval.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-seqval) : develop
+
+[dockstore-cgp-chksum](https://github.com/cancerit/dockstore-cgp-chksum)
+[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : master
+[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : develop
+
+
 ### chksum_seqval_wf_single_fq.cwl
 
 #### Inputs
 
 * `fastq_in` - An interleaved FastQ file.
 * `post_address` - An URL to send checksum results to via POST. Optional.
+* `post_header` - A list of headers to send with the checksum results to via POST. Optional.
 
 #### Outputs
 
@@ -27,6 +39,7 @@ Dockstore workflows to import sequencing files
 
 * `fastq_in` - A **list** of two FastQ files.
 * `post_address` - A **list** of two URLs to send checksum results of coresponding FasetQ to via POST. It's required and **NOT** optional, but two empty strings can be used if no POST is required.
+* `post_header` - A list of headers to send with the checksum results to via POST. Optional.
 
 #### Outputs
 
