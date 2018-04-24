@@ -1,0 +1,44 @@
+{
+  "fastq_in": [
+    { "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_1.fq.gz",
+      "class": "File"},
+    { "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_2.fq.gz",
+      "class": "File"}
+  ],
+  "post_address": [
+      "https://postman-echo.com/post",
+      "https://postman-echo.com/post"
+    ],
+  "post_headers": [
+    "feak-header-1:i-am-real",
+    "feak-header-2: feak-header-1-is-not-real"
+  ],
+  "chksum_json": [
+    {
+      "path":"/tmp/tiny_1.chksum_result.json",
+      "class": "File"
+    },
+    {
+      "path":"/tmp/tiny_2.chksum_result.json",
+      "class": "File"
+    }
+  ],
+  "chksum_post_server_response": [
+    {
+      "path":"/tmp/tiny_1.post_response.json",
+      "class": "File"
+    },
+    {
+      "path":"/tmp/tiny_2.post_response.json",
+      "class": "File"
+    }
+  ],
+  "interleave_report_json": {
+    "path":"/tmp/interleaved.report.json",
+    "class": "File"
+  },
+  "interleave_ifastq_out": {
+    "path":"/tmp/interleaved.fq.gz",
+    "class": "File"
+  }
+}
