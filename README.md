@@ -18,7 +18,7 @@ These workflows were built based on existing tools below:
   [![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : master
   [![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : develop
 
-### chksum_seqval_wf_single_fq.cwl
+### chksum_seqval_wf_interleaved_fq.cwl
 
 #### Inputs
 
