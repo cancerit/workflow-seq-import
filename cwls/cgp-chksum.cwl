@@ -8,9 +8,13 @@ label: "CGP file checksum generator"
 
 cwlVersion: v1.0
 
+doc: |
+    ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgp-chksum/status)
+    A Docker container for producing file md5sum and sha512sum. See the [dockstore-cgp-chksum](https://github.com/cancerit/dockstore-cgp-chksum) website for more information.
+
 requirements:
   - class: DockerRequirement
-    dockerPull: "quay.io/wtsicgp/dockstore-cgp-chksum:0.1.2"
+    dockerPull: "quay.io/wtsicgp/dockstore-cgp-chksum:0.2.0"
 
 inputs:
   in_file:
@@ -18,6 +22,8 @@ inputs:
     doc: "file to have checksum generated from"
     inputBinding:
       position: 1
+      prefix: -i
+      separate: true
       shellQuote: true
 
   post_address:
@@ -25,7 +31,22 @@ inputs:
     doc: "Optional POST address to send JSON results"
     inputBinding:
       position: 2
+      prefix: -p
+      separate: true
       shellQuote: true
+
+  post_header:
+    type:
+      - "null"
+      - type: array
+        items: string
+        inputBinding:
+          prefix: -H
+          separate: true
+          shellQuote: true
+    doc: "Optional headers to send with JSON results"
+    inputBinding:
+      position: 3
 
 outputs:
   chksum_json:

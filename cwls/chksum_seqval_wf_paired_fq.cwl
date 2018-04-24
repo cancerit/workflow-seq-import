@@ -25,7 +25,11 @@ inputs:
     type:
       type: array
       items: ["null", string]
-    doc: "Optional POST address to send JSON results of checksums"
+    doc: "POST address to send JSON results of checksums, use list of empty strings if no POST is required."
+
+  post_header:
+    type: string[]?
+    doc: "Optional headers to send with JSON results."
 
 outputs:
   chksum_json:
@@ -70,6 +74,8 @@ steps:
         source: rename/outfile
       post_address:
         source: post_address
+      post_header:
+        source: post_header
     out: [chksum_json, post_server_response]
     scatter: [in_file, post_address]
     scatterMethod: dotproduct

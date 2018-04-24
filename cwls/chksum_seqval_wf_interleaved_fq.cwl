@@ -19,8 +19,12 @@ inputs:
     doc: "Fastq files to import, can be gzipped."
 
   post_address:
-    type: ["null", string]
+    type: string?
     doc: "Optional POST address to send JSON results of checksums"
+
+  post_header:
+    type: string[]?
+    doc: "Optional headers to send with JSON results"
 
 outputs:
   chksum_json:
@@ -59,6 +63,8 @@ steps:
         source: rename/outfile
       post_address:
         source: post_address
+      post_header:
+        source: post_header
     out: [chksum_json, post_server_response]
     run: cgp-chksum.cwl
 
