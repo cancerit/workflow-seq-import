@@ -1,22 +1,22 @@
 # workflow-seq-import
 
-Dockstore workflows to import sequencing files
+Dockstore workflows to import sequencing files.
 
 [![Build Status](https://travis-ci.org/cancerit/workflow-seq-import.svg?branch=master)](https://travis-ci.org/cancerit/workflow-seq-import) : master
 [![Build Status](https://travis-ci.org/cancerit/workflow-seq-import.svg?branch=develop)](https://travis-ci.org/cancerit/workflow-seq-import) : develop
 
 ## Workflows
 
-These workflow were built based on existing tools below:
+These workflows were built based on existing tools below:
 
-[dockstore-cgp-seqval](https://github.com/cancerit/dockstore-cgp-seqval)
-[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-seqval.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-seqval) : master
-[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-seqval.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-seqval) : develop
+* [dockstore-cgp-seqval](https://github.com/cancerit/dockstore-cgp-seqval)
 
-[dockstore-cgp-chksum](https://github.com/cancerit/dockstore-cgp-chksum)
-[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : master
-[![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : develop
+  [![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-seqval.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-seqval) : master
+  [![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-seqval.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-seqval) : develop
+* [dockstore-cgp-chksum](https://github.com/cancerit/dockstore-cgp-chksum)
 
+  [![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : master
+  [![Build Status](https://travis-ci.org/cancerit/dockstore-cgp-chksum.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgp-chksum) : develop
 
 ### chksum_seqval_wf_single_fq.cwl
 
