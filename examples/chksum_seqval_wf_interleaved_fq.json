@@ -1,0 +1,23 @@
+{
+  "fastq_in": {
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_interleaved.fq.gz",
+    "class": "File"
+  },
+  "post_address":"https://postman-echo.com/post",
+  "chksum_json": {
+    "path":"/tmp/chksum_fq_inter_result.json",
+    "class": "File"
+  },
+  "chksum_post_server_response": {
+    "path":"/tmp/post_response_1.json",
+    "class": "File"
+  },
+  "interleave_report_json": {
+    "path":"/tmp/interleaved.report.json",
+    "class": "File"
+  },
+  "interleave_ifastq_out": {
+    "path":"/tmp/interleaved.fq.gz",
+    "class": "File"
+  }
+}
