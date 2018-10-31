@@ -16,7 +16,7 @@ inputs:
   fastq_in:
     type: File
     format: edam:format_1930
-    doc: "Fastq files to import, can be gzipped."
+    doc: "The interleaved fastq file to import, can be gzipped."
 
   post_address:
     type: string?
