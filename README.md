@@ -105,7 +105,6 @@ in the base of the clone:
 
 ----
 
-```
 LICENCE
 
 Copyright (c) 2018 Genome Research Ltd.
