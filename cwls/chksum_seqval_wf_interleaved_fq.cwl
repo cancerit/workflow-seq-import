@@ -11,12 +11,13 @@ cwlVersion: v1.0
 requirements:
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
+  - class: MultipleInputFeatureRequirement
 
 inputs:
   fastq_in:
     type: File
     format: edam:format_1930
-    doc: "The interleaved fastq file to import, can be gzipped."
+    doc: "The gzipped interleaved fastq file to import."
 
   post_address:
     type: string?
@@ -45,6 +46,10 @@ outputs:
     type: File
     format: edam:format_1930
     outputSource: rename/outfile
+  
+  rg_file_names:
+    type: File
+    outputSource: names_to_file/outfile
 
 steps:
   rename:
@@ -53,7 +58,7 @@ steps:
         source: fastq_in
       newname:
         source: fastq_in
-        valueFrom: $(self.nameroot).fq.gz
+        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz)?$/i, "")).fq.gz
     out: [outfile]
     run: rename.cwl
 
@@ -66,15 +71,23 @@ steps:
       post_headers:
         source: post_headers
     out: [chksum_json, post_server_response]
-    run: cgp-chksum.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.2.0/Dockstore.cwl
 
   interleave:
     in:
       fastqs_in:
-        source: rename/outfile
-        valueFrom: ${ return [ self ]; }
+        source: [rename/outfile]
+        linkMerge: merge_flattened
     out: [report_json]
     run: cgp-seqval-qc_pairs_1.cwl
+  
+  names_to_file:
+    in:
+      files:
+        source: [rename/outfile]
+        linkMerge: merge_flattened
+    out: [outfile]
+    run: echo_filenames_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
