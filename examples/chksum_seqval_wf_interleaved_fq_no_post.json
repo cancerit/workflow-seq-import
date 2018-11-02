@@ -14,5 +14,9 @@
   "interleave_ifastq_out": {
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
+  },
+  "rg_file_names": {
+    "path":"/tmp/rg_file_names.txt",
+    "class": "File"
   }
 }
