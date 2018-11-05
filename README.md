@@ -22,7 +22,7 @@ These workflows were built based on existing tools below:
 
 #### Inputs
 
-* `fastq_in` - An gzipped interleaved FastQ file.
+* `fastq_in` - A gzipped interleaved FastQ file.
 * `post_address` - An URL to send checksum results to via POST. Optional.
 * `post_headers` - A list of headers to send with the checksum results to via POST. Optional.
 
@@ -32,14 +32,14 @@ These workflows were built based on existing tools below:
 * `chksum_post_server_response` - POST server response in a text file. Optional, if no `post_address` is given.
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
-* `rg_file_names` - A file which has the file name of the gzipped FastQ output file of the workflow. **NOTE:** The file will be useless if the workflow is ran by Dockstore, as the output file will be renamed by Dockstore.
+* `rg_file_names` - A file which has the file name of the gzipped FastQ output file of the workflow. **NOTE:** The file will be useless if the workflow is run by Dockstore, as the output file will be renamed by Dockstore.
 
 ### chksum_seqval_wf_paired_fq.cwl
 
 #### Inputs
 
 * `fastq_in` - A **list** of two paired gzipped FastQ files.
-* `post_address` - A **list** of two URLs to send checksum results of coresponding FasetQ to via POST. It's required and **NOT** optional, but two empty strings can be used if no POST is required.
+* `post_address` - A **list** of two URLs to send checksum results of corresponding FasetQ to via POST. It's required and **NOT** optional, but two empty strings can be used if no POST is required.
 * `post_headers` - A list of headers to send with the checksum results to via POST. Optional.
 
 #### Outputs
@@ -48,7 +48,7 @@ These workflows were built based on existing tools below:
 * `chksum_post_server_response` - A list of two text files. Each has POST server response of one of the `fastq_in`. Optional if empty `post_address` was used.
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
-* `rg_file_names` - A file which has the file name of the gzipped FastQ output file of the workflow. **NOTE:** The file will be useless if the workflow is ran by Dockstore, as the output file will be renamed by Dockstore.
+* `rg_file_names` - A file which has the file name of the gzipped FastQ output file of the workflow. **NOTE:** The file will be useless if the workflow is run by Dockstore, as the output file will be renamed by Dockstore.
 
 ## Examples
 
