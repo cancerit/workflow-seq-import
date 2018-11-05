@@ -12,6 +12,7 @@ requirements:
   - class: ScatterFeatureRequirement
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
+  - class: MultipleInputFeatureRequirement
 
 inputs:
   fastq_in:
@@ -19,7 +20,7 @@ inputs:
       type: array
       items: File
     format: edam:format_1930
-    doc: "Fastq files to import, can be gzipped."
+    doc: "Gzipped fastq files to import."
 
   post_address:
     type:
@@ -54,6 +55,10 @@ outputs:
     type: ["null", File]
     format: edam:format_1930
     outputSource: interleave/ifastq_out
+  
+  rg_file_names:
+    type: File
+    outputSource: names_to_file/outfile
 
 steps:
   rename:
@@ -62,7 +67,7 @@ steps:
         source: fastq_in
       newname:
         source: fastq_in
-        valueFrom: $(self.nameroot).fq.gz
+        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz)?/i, "")).fq.gz
     scatter: [srcfile, newname]
     scatterMethod: dotproduct
     out: [outfile]
@@ -79,7 +84,7 @@ steps:
     out: [chksum_json, post_server_response]
     scatter: [in_file, post_address]
     scatterMethod: dotproduct
-    run: cgp-chksum.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.2.0/Dockstore.cwl
 
   interleave:
     in:
@@ -87,6 +92,14 @@ steps:
         source: rename/outfile
     out: [report_json, ifastq_out]
     run: cgp-seqval-qc_pairs_1.cwl
+  
+  names_to_file:
+    in:
+      files:
+        source: [interleave/ifastq_out]
+        linkMerge: merge_flattened
+    out: [outfile]
+    run: echo_filenames_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
