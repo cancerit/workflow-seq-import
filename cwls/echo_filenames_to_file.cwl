@@ -10,12 +10,15 @@ inputs:
       type: array
       items: File
     inputBinding:
-      valueFrom: $(self.map(f => f.basename))
-      itemSeparator: '\n'
+      valueFrom: |
+        ${
+          var arr = self.map(function (f) {return '"' + f.basename + '"'});
+          return '[' + arr.join(', ') + ']'
+        }
 outputs:
   outfile:
     type: File
     outputBinding:
-      glob: rg_file_names.txt
-baseCommand: ["echo", "-e"]
-stdout: rg_file_names.txt
+      glob: rg_manifest.json
+baseCommand: ["echo"]
+stdout: rg_manifest.json
