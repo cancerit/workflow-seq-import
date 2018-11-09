@@ -19,7 +19,6 @@ inputs:
     type:
       type: array
       items: File
-    format: edam:format_1930
     doc: "Gzipped fastq files to import."
 
   post_address:

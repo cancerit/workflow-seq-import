@@ -16,7 +16,6 @@ requirements:
 inputs:
   fastq_in:
     type: File
-    format: edam:format_1930
     doc: "The gzipped interleaved fastq file to import."
 
   post_address:
