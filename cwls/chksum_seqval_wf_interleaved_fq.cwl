@@ -82,7 +82,7 @@ steps:
     out: [report_json]
     run: cgp-seqval-qc_pairs_1.cwl
 
-  results_manifest:
+  results_manifest_string:
     in:
       input_files:
         source: [fastq_in]

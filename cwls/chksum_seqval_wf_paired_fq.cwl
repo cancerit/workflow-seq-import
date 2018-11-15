@@ -101,7 +101,7 @@ steps:
     out: [chksum_json]
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
 
-  results_manifest:
+  results_manifest_string:
     in:
       input_files:
         source: fastq_in
