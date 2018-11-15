@@ -45,7 +45,7 @@ outputs:
       items: ["null", File]
     outputSource: input_chksum/server_response
 
-  interleave_fastq_out:
+  interleaved_fastq_out:
     type: ["null", File]
     format: edam:format_1930
     outputSource: interleave/ifastq_out

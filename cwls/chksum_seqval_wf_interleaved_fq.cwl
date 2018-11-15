@@ -36,7 +36,7 @@ outputs:
     type: ["null", File]
     outputSource: chksum/server_response
 
-  interleave_fastq_out:
+  interleaved_fastq_out:
     type: File
     format: edam:format_1930
     outputSource: rename/outfile

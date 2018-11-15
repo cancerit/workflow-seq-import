@@ -7,11 +7,11 @@
     "path":"/tmp/chksum_fq_inter_result.json",
     "class": "File"
   },
-  "interleave_fastq_out": {
+  "interleaved_fastq_out": {
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
   },
-  "results_manefest": {
+  "results_manifest": {
     "path":"/tmp/rg_file_manefest.txt",
     "class": "File"
   }
