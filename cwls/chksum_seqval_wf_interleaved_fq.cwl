@@ -36,12 +36,7 @@ outputs:
     type: ["null", File]
     outputSource: chksum/server_response
 
-  interleave_report_json:
-    type: File
-    format: edam:format_3464
-    outputSource: interleave/report_json
-
-  interleave_ifastq_out:
+  interleave_fastq_out:
     type: File
     format: edam:format_1930
     outputSource: rename/outfile
@@ -73,14 +68,6 @@ steps:
         valueFrom: $(true)
     out: [chksum_json, server_response]
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
-
-  interleave:
-    in:
-      fastqs_in:
-        source: [rename/outfile]
-        linkMerge: merge_flattened
-    out: [report_json]
-    run: cgp-seqval-qc_pairs_1.cwl
 
   results_manifest_string:
     in:

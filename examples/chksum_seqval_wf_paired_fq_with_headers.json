@@ -33,11 +33,7 @@
       "class": "File"
     }
   ],
-  "interleave_report_json": {
-    "path":"/tmp/interleaved.report.json",
-    "class": "File"
-  },
-  "interleave_ifastq_out": {
+  "interleave_fastq_out": {
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
   },

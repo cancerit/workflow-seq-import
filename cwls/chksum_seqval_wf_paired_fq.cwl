@@ -45,12 +45,7 @@ outputs:
       items: ["null", File]
     outputSource: input_chksum/server_response
 
-  interleave_report_json:
-    type: File
-    format: edam:format_3464
-    outputSource: interleave/report_json
-
-  interleave_ifastq_out:
+  interleave_fastq_out:
     type: ["null", File]
     format: edam:format_1930
     outputSource: interleave/ifastq_out
@@ -91,8 +86,10 @@ steps:
     in:
       fastqs_in:
         source: rename/outfile
-    out: [report_json, ifastq_out]
-    run: cgp-seqval-qc_pairs_1.cwl
+      qc_pairs:
+        valueFrom: $(1)
+    out: [ifastq_out]
+    run: cgp-seqval-qc_pairs.cwl
 
   output_chksum:
     in:

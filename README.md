@@ -20,6 +20,8 @@ These workflows were built based on existing tools below:
 
 ### chksum_seqval_wf_interleaved_fq.cwl
 
+**NOTE:** This pipeline does not validate whether the input is in fact a interleaved fastq file.
+
 #### Inputs
 
 * `fastq_in` - A gzipped interleaved FastQ file.
@@ -30,14 +32,13 @@ These workflows were built based on existing tools below:
 
 * `chksum_json` - A file with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - PUT server response in a text file. Optional, if no `put_address` is given.
-* `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
-* `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
+* `interleave_fastq_out` - Interleaved gzipped FastQ output file.
 * `results_manefest` - A JSON file in the schema below:
 
     ```json
     {
         "input": [
-            {"name": "tiny_1.fq.gz", "size": 382, "md5": "...", "sha2": "..."}
+            {"name": "tiny.fq.gz", "size": 382, "md5": "...", "sha2": "..."}
         ],
         "output": [
             {"name": "interleaved.fq.gz", "size": 614, "md5": "...", "sha2": "..."}
@@ -59,8 +60,7 @@ These workflows were built based on existing tools below:
 
 * `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - A list of two text files. Each has PUT server response of one of the `fastq_in`. Optional if empty `putt_address` was used.
-* `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
-* `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
+* `interleave_fastq_out` - Interleaved gzipped FastQ output file.
 * `results_manefest` - A JSON file in the schema below:
 
     ```json

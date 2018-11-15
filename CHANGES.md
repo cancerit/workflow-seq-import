@@ -18,6 +18,9 @@
     }
     ```
 
+* renames some workflow input and output parameter names;
+* removed interleaved_report_json output from interleave and paired fastq workflows.
+
 ## 0.2.1
 
 * java script in `echo_filenames_to_file.cwl` uses ES5 syntax, and it now produces a file in JSON format, the output file name is also renamed to `rg_manifest.json`.
