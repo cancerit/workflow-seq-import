@@ -33,6 +33,7 @@ These workflows were built based on existing tools below:
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
 * `results_manefest` - A JSON file in the schema below:
+
     ```json
     {
         "input": [
@@ -43,6 +44,7 @@ These workflows were built based on existing tools below:
         ]
     }
     ```
+
     **NOTE:** File names can be wrong if run by Dockstore.
 
 ### chksum_seqval_wf_paired_fq.cwl
@@ -60,6 +62,7 @@ These workflows were built based on existing tools below:
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
 * `results_manefest` - A JSON file in the schema below:
+
     ```json
     {
         "input": [
@@ -71,6 +74,7 @@ These workflows were built based on existing tools below:
         ]
     }
     ```
+
     **NOTE:** File names can be wrong if run by Dockstore.
 
 ## Examples
