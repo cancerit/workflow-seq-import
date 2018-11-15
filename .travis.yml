@@ -13,7 +13,7 @@ install:
 script:
  - set -e
  - echo 'Validate Markdown file(s)'
- - mdl -r ~MD013,~MD024,~MD046 -g . # ignore line too long rule
+ - mdl -r ~MD013,~MD024,~MD046,~MD007 -g . # ignore line too long rule
  - echo 'Validate CWL file(s)'
  - cwltool --validate cwls/chksum_seqval_wf_interleaved_fq.cwl
  - cwltool --validate cwls/chksum_seqval_wf_paired_fq.cwl

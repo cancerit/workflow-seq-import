@@ -93,34 +93,28 @@ These workflows were built based on existing tools below:
 Examples included in this repository.
 
 1. `examples/chksum_seqval_wf_interleaved_fq.json`
-
-    * A single interleaved gzipped fastq is presented and a PUT server URL as input.
+   * A single interleaved gzipped fastq is presented and a PUT server URL as input.
 
 1. `examples/chksum_seqval_wf_interleaved_fq_with_headers.json`
-
-    * A list of headers is in the input.
-    * PUT the results with headers.
+   * A list of headers is in the input.
+   * PUT the results with headers.
 
 1. `examples/chksum_seqval_wf_interleaved_fq_no_put.json`
-
-    * Only a single interleaved gzipped fastq is presented.
-    * `put_address` is not presented nor the `chksum_server_response`.
+   * Only a single interleaved gzipped fastq is presented.
+   * `put_address` is not presented nor the `chksum_server_response`.
 
 1. `examples/chksum_seqval_wf_paired_fq.json`
-
-    * A pair if read 1/2 gzipped fastq files are presented as input.
-    * Two PUT server URLs are presented as input.
+   * A pair if read 1/2 gzipped fastq files are presented as input.
+   * Two PUT server URLs are presented as input.
 
 1. `examples/chksum_seqval_wf_paired_fq_with_headers.json`
-
-    * A list of headers is in the input.
-    * All headers will be used in every PUT request.
+   * A list of headers is in the input.
+   * All headers will be used in every PUT request.
 
 1. `examples/chksum_seqval_wf_paired_fq_no_put.json`
-
-    * A pair if read 1/2 gzipped fastq files are presented as input.
-    * Two empty strings are presented as input PUT server URLs.
-    * `chksum_server_response` is not presented.
+   * A pair if read 1/2 gzipped fastq files are presented as input.
+   * Two empty strings are presented as input PUT server URLs.
+   * `chksum_server_response` is not presented.
 
 ## Development environment
 
