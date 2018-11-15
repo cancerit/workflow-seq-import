@@ -4,7 +4,7 @@ class: Workflow
 
 id: "chksum-seqval-workflow"
 
-label: "CGP checksum and interleave fastq generation workflow"
+label: "A CGP workflow to generate checksum of an interleave fastq"
 
 cwlVersion: v1.0
 

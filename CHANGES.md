@@ -19,7 +19,8 @@
     ```
 
 * renames some workflow input and output parameter names;
-* removed interleaved_report_json output from interleave and paired fastq workflows.
+* removed interleaved_report_json output from interleave and paired fastq workflows;
+* added a workflow to make a copy of an interleaved fastq and validate its format and base quality score range.
 
 ## 0.2.1
 
