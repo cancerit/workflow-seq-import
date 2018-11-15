@@ -93,28 +93,34 @@ These workflows were built based on existing tools below:
 Examples included in this repository.
 
 1. `examples/chksum_seqval_wf_interleaved_fq.json`
-  * A single interleaved gzipped fastq is presented and a PUT server URL as input.
 
-2. `examples/chksum_seqval_wf_interleaved_fq_with_headers.json`
-  * A list of headers is in the input.
-  * PUT the results with headers.
+    * A single interleaved gzipped fastq is presented and a PUT server URL as input.
 
-3. `examples/chksum_seqval_wf_interleaved_fq_no_put.json`
-  * Only a single interleaved gzipped fastq is presented.
-  * `put_address` is not presented nor the `chksum_server_response`.
+1. `examples/chksum_seqval_wf_interleaved_fq_with_headers.json`
 
-4. `examples/chksum_seqval_wf_paired_fq.json`
-  * A pair if read 1/2 gzipped fastq files are presented as input.
-  * Two PUT server URLs are presented as input.
+    * A list of headers is in the input.
+    * PUT the results with headers.
 
-5. `examples/chksum_seqval_wf_paired_fq_with_headers.json`
-  * A list of headers is in the input.
-  * All headers will be used in every PUT request.
+1. `examples/chksum_seqval_wf_interleaved_fq_no_put.json`
 
-6. `examples/chksum_seqval_wf_paired_fq_no_put.json`
-  * A pair if read 1/2 gzipped fastq files are presented as input.
-  * Two empty strings are presented as input PUT server URLs.
-  * `chksum_server_response` is not presented.
+    * Only a single interleaved gzipped fastq is presented.
+    * `put_address` is not presented nor the `chksum_server_response`.
+
+1. `examples/chksum_seqval_wf_paired_fq.json`
+
+    * A pair if read 1/2 gzipped fastq files are presented as input.
+    * Two PUT server URLs are presented as input.
+
+1. `examples/chksum_seqval_wf_paired_fq_with_headers.json`
+
+    * A list of headers is in the input.
+    * All headers will be used in every PUT request.
+
+1. `examples/chksum_seqval_wf_paired_fq_no_put.json`
+
+    * A pair if read 1/2 gzipped fastq files are presented as input.
+    * Two empty strings are presented as input PUT server URLs.
+    * `chksum_server_response` is not presented.
 
 ## Development environment
 
@@ -122,13 +128,13 @@ This project uses git pre-commit hooks.  As these will execute on your system yo
 
 You will need to install:
 
-```
+```bash
 gem install --user-install mdl
 ```
 
 The following command will activate the checks to execute before a commit is processed:
 
-```
+```bash
 git config core.hooksPath git-hooks
 ```
 
