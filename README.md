@@ -20,7 +20,7 @@ These workflows were built based on existing tools below:
 
 ### chksum_seqval_wf_interleaved_fq.cwl
 
-**NOTE:** This pipeline does not validate whether the input is in fact a interleaved fastq file.
+**NOTE:** This pipeline does not validate whether the input is in fact an interleaved fastq file.
 
 #### Inputs
 
