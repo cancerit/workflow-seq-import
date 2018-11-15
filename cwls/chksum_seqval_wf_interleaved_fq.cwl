@@ -102,7 +102,7 @@ steps:
   manifest_string_to_file:
     in:
       in_string:
-        source: [results_manifest/out_string]
+        source: [results_manifest_string/out_string]
     out: [outfile]
     run: string_to_file.cwl
 
