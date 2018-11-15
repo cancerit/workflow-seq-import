@@ -3,13 +3,13 @@
     "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_interleaved.fq.gz",
     "class": "File"
   },
-  "post_address":"https://postman-echo.com/post",
+  "put_address":"https://postman-echo.com/put",
   "chksum_json": {
     "path":"/tmp/chksum_fq_inter_result.json",
     "class": "File"
   },
-  "chksum_post_server_response": {
-    "path":"/tmp/post_response_1.json",
+  "chksum_put_server_response": {
+    "path":"/tmp/server_response_1.json",
     "class": "File"
   },
   "interleave_report_json": {
@@ -20,8 +20,8 @@
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
   },
-  "rg_file_names": {
-    "path":"/tmp/rg_file_names.txt",
+  "results_manefest": {
+    "path":"/tmp/rg_file_manefest.txt",
     "class": "File"
   }
 }

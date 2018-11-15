@@ -23,60 +23,83 @@ These workflows were built based on existing tools below:
 #### Inputs
 
 * `fastq_in` - A gzipped interleaved FastQ file.
-* `post_address` - An URL to send checksum results to via POST. Optional.
-* `post_headers` - A list of headers to send with the checksum results to via POST. Optional.
+* `put_address` - An URL to send checksum results to via PUT. Optional.
+* `put_headers` - A list of headers to send with the checksum results to via PUT. Optional.
 
 #### Outputs
 
 * `chksum_json` - A file with MD5 and SHA256 checksums of `fastq_in` in JSON format.
-* `chksum_post_server_response` - POST server response in a text file. Optional, if no `post_address` is given.
+* `chksum_server_response` - PUT server response in a text file. Optional, if no `put_address` is given.
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
-* `rg_file_names` - A file which has the file name of the gzipped FastQ output file of the workflow. **NOTE:** The file will be useless if the workflow is run by Dockstore, as the output file will be renamed by Dockstore.
+* `results_manefest` - A JSON file in the schema below:
+    ```json
+    {
+        "input": [
+            {"name": "tiny_1.fq.gz", "size": 382, "md5": "...", "sha2": "..."}
+        ],
+        "output": [
+            {"name": "interleaved.fq.gz", "size": 614, "md5": "...", "sha2": "..."}
+        ]
+    }
+    ```
+    **NOTE:** File names can be wrong if run by Dockstore.
 
 ### chksum_seqval_wf_paired_fq.cwl
 
 #### Inputs
 
 * `fastq_in` - A **list** of two paired gzipped FastQ files.
-* `post_address` - A **list** of two URLs to send checksum results of corresponding FasetQ to via POST. It's required and **NOT** optional, but two empty strings can be used if no POST is required.
-* `post_headers` - A list of headers to send with the checksum results to via POST. Optional.
+* `put_address` - A **list** of two URLs to send checksum results of corresponding FasetQ to via PUT. It's required and **NOT** optional, but two empty strings can be used if no PUT is required.
+* `put_headers` - A list of headers to send with the checksum results to via PUT. Optional.
 
 #### Outputs
 
 * `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
-* `chksum_post_server_response` - A list of two text files. Each has POST server response of one of the `fastq_in`. Optional if empty `post_address` was used.
+* `chksum_server_response` - A list of two text files. Each has PUT server response of one of the `fastq_in`. Optional if empty `putt_address` was used.
 * `interleave_report_json`- A json report evaluating the analysis of the `fastq_in`.
 * `interleave_ifastq_out` - Interleaved gzipped FastQ output file.
-* `rg_file_names` - A file which has the file name of the gzipped FastQ output file of the workflow. **NOTE:** The file will be useless if the workflow is run by Dockstore, as the output file will be renamed by Dockstore.
+* `results_manefest` - A JSON file in the schema below:
+    ```json
+    {
+        "input": [
+            {"name": "tiny_1.fq.gz", "size": 382, "md5": "...", "sha2": "..."},
+            {"name": "tiny_2.fq.gz", "size": 391, "md5": "...", "sha2": "..."}
+        ],
+        "output": [
+            {"name": "interleaved.fq.gz", "size": 614, "md5": "...", "sha2": "..."}
+        ]
+    }
+    ```
+    **NOTE:** File names can be wrong if run by Dockstore.
 
 ## Examples
 
 Examples included in this repository.
 
 1. `examples/chksum_seqval_wf_interleaved_fq.json`
-  * A single interleaved gzipped fastq is presented and a POST server URL as input.
+  * A single interleaved gzipped fastq is presented and a PUT server URL as input.
 
 1. `examples/chksum_seqval_wf_interleaved_fq_with_headers.json`
   * A list of headers is in the input.
-  * POST the results with headers.
+  * PUT the results with headers.
 
-1. `examples/chksum_seqval_wf_interleaved_fq_no_post.json`
+1. `examples/chksum_seqval_wf_interleaved_fq_no_put.json`
   * Only a single interleaved gzipped fastq is presented.
-  * `post_address` is not presented nor the `chksum_post_server_response`.
+  * `put_address` is not presented nor the `chksum_server_response`.
 
 1. `examples/chksum_seqval_wf_paired_fq.json`
   * A pair if read 1/2 gzipped fastq files are presented as input.
-  * Two POST server URLs are presented as input.
+  * Two PUT server URLs are presented as input.
 
 1. `examples/chksum_seqval_wf_paired_fq_with_headers.json`
   * A list of headers is in the input.
-  * All headers will be used in every POST request.
+  * All headers will be used in every PUT request.
 
-1. `examples/chksum_seqval_wf_paired_fq_no_post.json`
+1. `examples/chksum_seqval_wf_paired_fq_no_put.json`
   * A pair if read 1/2 gzipped fastq files are presented as input.
-  * Two empty strings are presented as input POST server URLs.
-  * `chksum_post_server_response` is not presented.
+  * Two empty strings are presented as input PUT server URLs.
+  * `chksum_server_response` is not presented.
 
 ## Development environment
 

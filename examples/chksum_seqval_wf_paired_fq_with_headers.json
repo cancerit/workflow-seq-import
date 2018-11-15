@@ -5,11 +5,11 @@
     { "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_2.fq.gz",
       "class": "File"}
   ],
-  "post_address": [
-      "https://postman-echo.com/post",
-      "https://postman-echo.com/post"
+  "put_address": [
+      "https://postman-echo.com/put",
+      "https://postman-echo.com/put"
     ],
-  "post_headers": [
+  "put_headers": [
     "feak-header-1:i-am-real",
     "feak-header-2: feak-header-1-is-not-real"
   ],
@@ -23,13 +23,13 @@
       "class": "File"
     }
   ],
-  "chksum_post_server_response": [
+  "chksum_put_server_response": [
     {
-      "path":"/tmp/tiny_1.post_response.json",
+      "path":"/tmp/tiny_1.server_response.json",
       "class": "File"
     },
     {
-      "path":"/tmp/tiny_2.post_response.json",
+      "path":"/tmp/tiny_2.server_response.json",
       "class": "File"
     }
   ],
@@ -41,8 +41,8 @@
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
   },
-  "rg_file_names": {
-    "path":"/tmp/rg_file_names.txt",
+  "results_manefest": {
+    "path":"/tmp/rg_file_manefest.txt",
     "class": "File"
   }
 }

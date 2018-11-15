@@ -5,7 +5,7 @@
     { "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_2.fq.gz",
       "class": "File"}
   ],
-  "post_address": ["", ""],
+  "put_address": ["", ""],
   "chksum_json": [
     {
       "path":"/tmp/tiny_1.chksum_result.json",
@@ -24,8 +24,8 @@
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
   },
-  "rg_file_names": {
-    "path":"/tmp/rg_file_names.txt",
+  "results_manefest": {
+    "path":"/tmp/rg_file_manefest.txt",
     "class": "File"
   }
 }
