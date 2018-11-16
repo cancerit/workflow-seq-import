@@ -4,7 +4,7 @@ class: Workflow
 
 id: "chksum-seqval-workflow"
 
-label: "CGP checksum and interleave fastq generation workflow"
+label: "A CGP workflow to generate checksum of an interleaved fastq"
 
 cwlVersion: v1.0
 
@@ -18,11 +18,11 @@ inputs:
     type: File
     doc: "The gzipped interleaved fastq file to import."
 
-  post_address:
+  put_address:
     type: string?
-    doc: "Optional POST address to send JSON results of checksums"
+    doc: "Optional PUT address to send JSON results of checksums"
 
-  post_headers:
+  put_headers:
     type: string[]?
     doc: "Optional headers to send with JSON results"
 
@@ -32,23 +32,18 @@ outputs:
     format: edam:format_3464
     outputSource: chksum/chksum_json
 
-  chksum_post_server_response:
+  chksum_put_server_response:
     type: ["null", File]
-    outputSource: chksum/post_server_response
+    outputSource: chksum/server_response
 
-  interleave_report_json:
-    type: File
-    format: edam:format_3464
-    outputSource: interleave/report_json
-
-  interleave_ifastq_out:
+  interleaved_fastq_out:
     type: File
     format: edam:format_1930
     outputSource: rename/outfile
   
-  rg_file_names:
+  results_manifest:
     type: File
-    outputSource: names_to_file/outfile
+    outputSource: manifest_string_to_file/outfile
 
 steps:
   rename:
@@ -65,28 +60,38 @@ steps:
     in:
       in_file:
         source: rename/outfile
-      post_address:
-        source: post_address
-      post_headers:
-        source: post_headers
-    out: [chksum_json, post_server_response]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.2.0/Dockstore.cwl
+      put_address:
+        source: put_address
+      put_headers:
+        source: put_headers
+      ignore_all_curl_exits:
+        valueFrom: $(true)
+    out: [chksum_json, server_response]
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
 
-  interleave:
+  results_manifest_string:
     in:
-      fastqs_in:
+      input_files:
+        source: [fastq_in]
+        linkMerge: merge_flattened
+      input_chksum_results:
+        source: [chksum/chksum_json]
+        linkMerge: merge_flattened
+      output_files:
         source: [rename/outfile]
         linkMerge: merge_flattened
-    out: [report_json]
-    run: cgp-seqval-qc_pairs_1.cwl
+      output_chksum_results:
+        source: [chksum/chksum_json]
+        linkMerge: merge_flattened
+    out: [out_string]
+    run: results_manifest.cwl
   
-  names_to_file:
+  manifest_string_to_file:
     in:
-      files:
-        source: [rename/outfile]
-        linkMerge: merge_flattened
+      in_string:
+        source: [results_manifest_string/out_string]
     out: [outfile]
-    run: echo_filenames_to_file.cwl
+    run: string_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
@@ -109,4 +114,4 @@ s:author:
 
 dct:creator:
   foaf:name: Yaobo Xu
-  foaf:mbox: "yyaobo@gmail.com"
+  foaf:mbox: "genservhelp@sanger.ac.uk"

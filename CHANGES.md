@@ -1,5 +1,27 @@
 # CHANGES
 
+## 0.2.2
+
+* updated cwl file version for `chksum` step in workflows to `0.4.0`, some input and output parameter names were changed to reflect the HTTP method was changed to `PUT` from `POST` in the new version;
+* suppressed all curl exit codes when putting results.
+* output `rg_file_manifest` name is changed to `results_manifest`, schema is changed to:
+
+    ```json
+    {
+        "input": [
+            {"name": "tiny_1.fq.gz", "size": 382, "md5": "...", "sha2": "..."},
+            {"name": "tiny_2.fq.gz", "size": 391, "md5": "...", "sha2": "..."}
+        ],
+        "output": [
+            {"name": "interleaved.fq.gz", "size": 614, "md5": "...", "sha2": "..."}
+        ]
+    }
+    ```
+
+* renames some workflow input and output parameter names;
+* removed interleaved_report_json output from interleave and paired fastq workflows;
+* added a workflow to make a copy of an interleaved fastq and validate its format and base quality score range.
+
 ## 0.2.1
 
 * java script in `echo_filenames_to_file.cwl` uses ES5 syntax, and it now produces a file in JSON format, the output file name is also renamed to `rg_manifest.json`.

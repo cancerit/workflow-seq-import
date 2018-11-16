@@ -1,0 +1,14 @@
+{
+  "fastq_in": {
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_interleaved.fq.gz",
+    "class": "File"
+  },
+  "interleaved_fastq_out": {
+    "path":"/tmp/interleaved.fq.gz",
+    "class": "File"
+  },
+  "report": {
+    "path":"/tmp/report.txt",
+    "class": "File"
+  }
+}
