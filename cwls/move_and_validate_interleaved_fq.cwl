@@ -4,7 +4,7 @@ class: Workflow
 
 id: "move-and-validate-a-interleaved-fastq"
 
-label: "A CGP workflow to move and validate an interleave fastq"
+label: "A CGP workflow to move and validate an interleaved fastq"
 
 cwlVersion: v1.0
 
@@ -68,4 +68,4 @@ s:author:
 
 dct:creator:
   foaf:name: Yaobo Xu
-  foaf:mbox: "yyaobo@gmail.com"
+  foaf:mbox: "genservhelp@sanger.ac.uk"

@@ -4,7 +4,7 @@ class: Workflow
 
 id: "chksum-seqval-workflow"
 
-label: "A CGP workflow to generate checksum of an interleave fastq"
+label: "A CGP workflow to generate checksum of an interleaved fastq"
 
 cwlVersion: v1.0
 
@@ -114,4 +114,4 @@ s:author:
 
 dct:creator:
   foaf:name: Yaobo Xu
-  foaf:mbox: "yyaobo@gmail.com"
+  foaf:mbox: "genservhelp@sanger.ac.uk"

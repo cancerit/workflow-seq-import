@@ -2,7 +2,7 @@
 
 ## 0.2.2
 
-* updated cwl file version for for `chksum` step in workflows to `0.4.0`, some input and output parameter names were changed to reflect the HTTP method was changed to `PUT` from `POST` in the new version;
+* updated cwl file version for `chksum` step in workflows to `0.4.0`, some input and output parameter names were changed to reflect the HTTP method was changed to `PUT` from `POST` in the new version;
 * suppressed all curl exit codes when putting results.
 * output `rg_file_manifest` name is changed to `results_manifest`, schema is changed to:
 

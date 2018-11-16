@@ -85,4 +85,4 @@ s:author:
 dct:creator:
   "@id": "keiranmraine@gmail.com"
   foaf:name: Keiran Raine
-  foaf:mbox: "keiranmraine@gmail.com"
+  foaf:mbox: "genservhelp@sanger.ac.uk"
