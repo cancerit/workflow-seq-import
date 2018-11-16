@@ -5,7 +5,7 @@
     { "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_2.fq.gz",
       "class": "File"}
   ],
-  "post_address": ["", ""],
+  "put_address": ["", ""],
   "chksum_json": [
     {
       "path":"/tmp/tiny_1.chksum_result.json",
@@ -16,16 +16,12 @@
       "class": "File"
     }
   ],
-  "interleave_report_json": {
-    "path":"/tmp/interleaved.report.json",
-    "class": "File"
-  },
-  "interleave_ifastq_out": {
+  "interleaved_fastq_out": {
     "path":"/tmp/interleaved.fq.gz",
     "class": "File"
   },
-  "rg_file_names": {
-    "path":"/tmp/rg_file_names.txt",
+  "results_manifest": {
+    "path":"/tmp/rg_file_manefest.txt",
     "class": "File"
   }
 }
