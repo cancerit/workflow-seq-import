@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.2.3
+
+* renamed workflow `move_and_validate_interleaved_fq.cwl` to `validate_interleaved_fq.cwl`, removed its `interleaved_fastq_out` output, updated its example json.
+
 ## 0.2.2
 
 * updated cwl file version for `chksum` step in workflows to `0.4.0`, some input and output parameter names were changed to reflect the HTTP method was changed to `PUT` from `POST` in the new version;

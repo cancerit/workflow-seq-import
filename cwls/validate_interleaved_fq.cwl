@@ -18,31 +18,16 @@ inputs:
     doc: "A gzipped interleaved fastq file."
 
 outputs:
-  interleaved_fastq_out:
-    type: File
-    format: edam:format_1930
-    outputSource: rename/outfile
-  
   report:
     type: File
     format: edam:format_3464
     outputSource: validate/report_json
 
 steps:
-  rename:
-    in:
-      srcfile:
-        source: fastq_in
-      newname:
-        source: fastq_in
-        valueFrom: $(self.basename)
-    out: [outfile]
-    run: rename.cwl
-
   validate:
     in:
       fastqs_in:
-        source: [rename/outfile]
+        source: [fastq_in]
         linkMerge: merge_flattened
     out: [report_json]
     run: cgp-seqval-qc_pairs.cwl
