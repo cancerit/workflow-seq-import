@@ -77,7 +77,7 @@ These workflows were built based on existing tools below:
 
     **NOTE:** File names can be wrong if run by Dockstore.
 
-### move_and_validate_interleaved_fq.cwl
+### validate_interleaved_fq.cwl
 
 #### Inputs
 
@@ -85,7 +85,6 @@ These workflows were built based on existing tools below:
 
 #### Outputs
 
-* `interleaved_fastq_out` - Interleaved gzipped FastQ output file.
 * `report` - A json report evaluating the format and base quality of the input fastq.
 
 ## Examples
@@ -115,6 +114,8 @@ Examples included in this repository.
    * A pair if read 1/2 gzipped fastq files are presented as input.
    * Two empty strings are presented as input PUT server URLs.
    * `chksum_server_response` is not presented.
+
+1. `examples/validate_fq.json`
 
 ## Development environment
 
