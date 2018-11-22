@@ -1,0 +1,23 @@
+{
+  "xam_in": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpmap/insilico_21.bam",
+    "class": "File"
+  },
+  "put_address":"https://postman-echo.com/put",
+  "chksum_json": {
+    "path":"/tmp/chksum_fq_inter_result.json",
+    "class": "File"
+  },
+  "chksum_put_server_response": {
+    "path":"/tmp/server_response_1.json",
+    "class": "File"
+  },
+  "interleaved_fastq_out": {
+    "path":"/tmp/interleaveds",
+    "class": "Directory"
+  },
+  "results_manifest": {
+    "path":"/tmp/rg_file_manefest.txt",
+    "class": "File"
+  }
+}
