@@ -68,7 +68,7 @@ steps:
   chksum:
     in:
       in_file:
-        source: rename/outfile
+        source: xam_in
       put_address:
         source: put_address
       put_headers:
@@ -95,8 +95,6 @@ steps:
     scatterMethod: dotproduct
     out: [chksum_json] #An array of chksums directly relating to the input array of interleaved fastq files
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
-
-  
 
   results_manifest_string:
     in:
