@@ -33,7 +33,7 @@ These workflows were built based on existing tools below:
 * `chksum_json` - A file with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - PUT server response in a text file. Optional, if no `put_address` is given.
 * `interleaved_fastq_out` - Interleaved gzipped FastQ output file.
-* `results_manefest` - A JSON file in the schema below:
+* `results_manifest` - A JSON file in the schema below:
 
     ```json
     {
@@ -61,7 +61,7 @@ These workflows were built based on existing tools below:
 * `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - A list of two text files. Each has PUT server response of one of the `fastq_in`. Optional if empty `put_address` was used.
 * `interleaved_fastq_out` - Interleaved gzipped FastQ output file.
-* `results_manefest` - A JSON file in the schema below:
+* `results_manifest` - A JSON file in the schema below:
 
     ```json
     {
