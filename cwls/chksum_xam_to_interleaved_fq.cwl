@@ -81,7 +81,7 @@ steps:
       xam_in:
         source: xam_in
       ref_path:
-        source: cram_ref_path
+        source: cram_ref_url
     out: [ifastqs_out, rg_info_json]
     run: https://raw.githubusercontent.com/cancerit/dockstore-samtools-biobambam2/0.0.1/cwls/xam_to_interleaved_by_rg.cwl
 
