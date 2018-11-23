@@ -27,10 +27,10 @@ inputs:
     type: string[]?
     doc: "Optional headers to send with JSON results"
 
-  cram_ref_path:
+  cram_ref_url:
     type: string
-    doc: "URL path to use as cram reference e.g. 'URL=https://www.ebi.ac.uk/ena/cram/md5/%s'"
-    default: "URL=https://www.ebi.ac.uk/ena/cram/md5/%s"
+    doc: "URL path to use as cram reference e.g. 'https://www.ebi.ac.uk/ena/cram/md5/%s'"
+    default: "https://www.ebi.ac.uk/ena/cram/md5/%s"
 
 outputs:
   chksum_json:
@@ -66,7 +66,7 @@ steps:
   chksum:
     in:
       in_file:
-        source: xam_in
+        source: rename/outfile
       put_address:
         source: put_address
       put_headers:
@@ -79,7 +79,7 @@ steps:
   xam_to_interleaved_fq:
     in:
       xam_in:
-        source: rename/outfile
+        source: xam_in
       ref_path:
         source: cram_ref_path
     out: [ifastqs_out, rg_info_json]
