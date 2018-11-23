@@ -45,13 +45,11 @@ inputs:
 outputs:
   report_json:
     type: File
-    format: edam:format_3464
     outputBinding:
       glob: report.json
 
   ifastq_out:
     type: ["null", File]
-    format: edam:format_1930
     outputBinding:
       glob: interleaved.fq.gz
 
@@ -67,11 +65,9 @@ doc: |
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
-  - http://edamontology.org/EDAM_1.18.owl
 
 $namespaces:
   s: http://schema.org/
-  edam: http://edamontology.org/
 
 s:codeRepository: https://github.com/cancerit/dockstore-cgp-seqval
 s:license: https://spdx.org/licenses/AGPL-3.0

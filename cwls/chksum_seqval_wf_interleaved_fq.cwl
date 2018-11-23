@@ -29,7 +29,6 @@ inputs:
 outputs:
   chksum_json:
     type: File
-    format: edam:format_3464
     outputSource: chksum/chksum_json
 
   chksum_put_server_response:
@@ -38,7 +37,6 @@ outputs:
 
   interleaved_fastq_out:
     type: File
-    format: edam:format_1930
     outputSource: rename/outfile
   
   results_manifest:
@@ -98,11 +96,9 @@ doc: |
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
-  - http://edamontology.org/EDAM_1.18.owl
 
 $namespaces:
   s: http://schema.org/
-  edam: http://edamontology.org/
 
 s:codeRepository: https://github.com/cancerit/workflow-seq-import
 s:license: https://spdx.org/licenses/AGPL-3.0

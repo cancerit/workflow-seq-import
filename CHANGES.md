@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.3.0
+
+* added workflow `chksum_xam_to_interleaved_fq`, which can split reads in a [B|Cr]am file into gzipped fastq files by read groups and preserved some RG tags in a json file.
+* removed all EDAM related lines from cwl files as the website sometime has very slow reponse.
+
 ## 0.2.3
 
 * renamed workflow `move_and_validate_interleaved_fq.cwl` to `validate_interleaved_fq.cwl`, removed its `interleaved_fastq_out` output, updated its example json.
