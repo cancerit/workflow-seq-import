@@ -77,6 +77,37 @@ These workflows were built based on existing tools below:
 
     **NOTE:** File names can be wrong if run by Dockstore.
 
+### chksum_xam_to_interleaved_fq.cwl
+
+#### Inputs
+
+* `xam_in` - A **list** of two paired gzipped FastQ files.
+* `put_address` - A **list** of two URLs to send checksum results of corresponding FasetQ to via PUT. It's required and **NOT** optional, but two empty strings can be used if no PUT is required.
+* `put_headers` - A list of headers to send with the checksum results to via PUT. Optional.
+* `cram_ref_url` - An URL of a cram reference registry. Default value: `https://www.ebi.ac.uk/ena/cram/md5/%s`.
+
+#### Outputs
+
+* `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
+* `chksum_server_response` - A list of two text files. Each has PUT server response of one of the `fastq_in`. Optional if empty `put_address` was used.
+* `interleaved_fastq_out` - Interleaved gzipped FastQ output files.
+* `results_manifest` - A JSON file in the schema below:
+
+    ```json
+    {
+        "input": [
+            {"name": "tiny.bam", "size": 1382, "md5": "...", "sha2": "..."}
+        ],
+        "output": [
+            {"name": "interleaved_rg1_i.fq.gz", "size": 614, "md5": "...", "sha2": "...", "rg_info": {"ID": "rg2",  "PU": "....", "PM": "....", } },
+            {"name": "interleaved_rg2_i.fq.gz", "size": 614, "md5": "...", "sha2": "...", "rg_info": {"ID": "rg2",  "PU": "....", "PM": "....", } }
+        ]
+    }
+    ```
+
+    **NOTE:** File names can be wrong if run by Dockstore.
+    **NOTE:** `rg_info` object will have whatever avaliable in the input [B|Cr]am file header RG lines, except `DS`, `SM` and `PG` tags. They are skipped deliberately.
+
 ### validate_interleaved_fq.cwl
 
 #### Inputs
