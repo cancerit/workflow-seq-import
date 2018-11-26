@@ -57,7 +57,7 @@ steps:
   chksum:
     in:
       in_file:
-        source: rename/outfile
+        source: fastq_in
       put_address:
         source: put_address
       put_headers:
