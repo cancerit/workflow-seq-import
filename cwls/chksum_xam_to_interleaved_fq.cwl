@@ -53,20 +53,11 @@ outputs:
     outputSource: manifest_string_to_file/outfile
 
 steps:
-  rename:
-    in:
-      srcfile:
-        source: xam_in
-      newname:
-        source: xam_in
-        valueFrom: $(self.basename)
-    out: [outfile]
-    run: rename.cwl
 
   chksum:
     in:
       in_file:
-        source: rename/outfile
+        source: xam_in
       put_address:
         source: put_address
       put_headers:
@@ -83,7 +74,7 @@ steps:
       ref_path:
         source: cram_ref_url
     out: [ifastqs_out, rg_info_json]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-samtools-biobambam2/0.0.1/cwls/xam_to_interleaved_by_rg.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-samtools-biobambam2/0.0.3/cwls/xam_to_interleaved_by_rg.cwl
 
   out_chksum:
     in: 

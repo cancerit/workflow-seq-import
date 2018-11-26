@@ -53,22 +53,11 @@ outputs:
     outputSource: manifest_string_to_file/outfile
 
 steps:
-  rename:
-    in:
-      srcfile:
-        source: fastq_in
-      newname:
-        source: fastq_in
-        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz)?/i, "")).fq.gz
-    scatter: [srcfile, newname]
-    scatterMethod: dotproduct
-    out: [outfile]
-    run: rename.cwl
 
   input_chksum:
     in:
       in_file:
-        source: rename/outfile
+        source: fastq_in
       put_address:
         source: put_address
       put_headers:
@@ -83,7 +72,7 @@ steps:
   interleave:
     in:
       fastqs_in:
-        source: rename/outfile
+        source: fastq_in
       qc_pairs:
         valueFrom: $(1)
     out: [ifastq_out]
