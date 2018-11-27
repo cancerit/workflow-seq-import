@@ -82,7 +82,7 @@ These workflows were built based on existing tools below:
 #### Inputs
 
 * `xam_in` - A [B|Cr]am file.
-* `put_address` - A **list** of two URLs to send checksum results of corresponding FasetQ to via PUT. It's required and **NOT** optional, but two empty strings can be used if no PUT is required.
+* `put_address` - An URL to send checksum results to via PUT. Optional.
 * `put_headers` - A list of headers to send with the checksum results to via PUT. Optional.
 * `cram_ref_url` - An URL of a cram reference registry. Default value: `https://www.ebi.ac.uk/ena/cram/md5/%s`.
 
