@@ -1,6 +1,6 @@
 {
-  "fastq_in": {
-    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/examples/tiny_interleaved.fq.gz",
+  "xam_in": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpmap/insilico_21.bam",
     "class": "File"
   },
   "put_address":"https://postman-echo.com/put",
@@ -13,8 +13,8 @@
     "class": "File"
   },
   "interleaved_fastq_out": {
-    "path":"/tmp/interleaved.fq.gz",
-    "class": "File"
+    "path":"/tmp/interleaveds",
+    "class": "Directory"
   },
   "results_manifest": {
     "path":"/tmp/rg_file_manifest.txt",

@@ -2,9 +2,9 @@
 
 class: Workflow
 
-id: "chksum-seqval-workflow"
+id: "chksum-xam-to-interleaved-fq-workflow"
 
-label: "A CGP workflow to generate checksum of an interleaved fastq"
+label: "A CGP workflow to generate checksum and interleaved fastq from a [Cr|B]am file"
 
 cwlVersion: v1.0
 
@@ -12,11 +12,12 @@ requirements:
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
   - class: MultipleInputFeatureRequirement
+  - class: ScatterFeatureRequirement
 
 inputs:
-  fastq_in:
+  xam_in:
     type: File
-    doc: "The gzipped interleaved fastq file to import."
+    doc: "The [B|Cr]am file to import."
 
   put_address:
     type: string?
@@ -25,6 +26,11 @@ inputs:
   put_headers:
     type: string[]?
     doc: "Optional headers to send with JSON results"
+
+  cram_ref_url:
+    type: string
+    doc: "URL path to use as cram reference e.g. 'https://www.ebi.ac.uk/ena/cram/md5/%s'"
+    default: "https://www.ebi.ac.uk/ena/cram/md5/%s"
 
 outputs:
   chksum_json:
@@ -36,28 +42,22 @@ outputs:
     outputSource: chksum/server_response
 
   interleaved_fastq_out:
-    type: File
-    outputSource: rename/outfile
+    type:
+        type: array
+        items: File
+    doc: "Array of gzipped interleaved fastq files, one per read group in xam_in"
+    outputSource: xam_to_interleaved_fq/ifastqs_out
   
   results_manifest:
     type: File
     outputSource: manifest_string_to_file/outfile
 
 steps:
-  rename:
-    in:
-      srcfile:
-        source: fastq_in
-      newname:
-        source: fastq_in
-        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz)?$/i, "")).fq.gz
-    out: [outfile]
-    run: rename.cwl
 
   chksum:
     in:
       in_file:
-        source: fastq_in
+        source: xam_in
       put_address:
         source: put_address
       put_headers:
@@ -67,20 +67,38 @@ steps:
     out: [chksum_json, server_response]
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
 
+  xam_to_interleaved_fq:
+    in:
+      xam_in:
+        source: xam_in
+      ref_path:
+        source: cram_ref_url
+    out: [ifastqs_out, rg_info_json]
+    run: https://raw.githubusercontent.com/cancerit/dockstore-samtools-biobambam2/0.0.3/cwls/xam_to_interleaved_by_rg.cwl
+
+  out_chksum:
+    in: 
+      in_file: 
+        source: xam_to_interleaved_fq/ifastqs_out
+    scatter: [in_file]
+    scatterMethod: dotproduct
+    out: [chksum_json] #An array of chksums directly relating to the input array of interleaved fastq files
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+
   results_manifest_string:
     in:
       input_files:
-        source: [fastq_in]
+        source: [xam_in]
         linkMerge: merge_flattened
       input_chksum_results:
         source: [chksum/chksum_json]
         linkMerge: merge_flattened
       output_files:
-        source: [rename/outfile]
-        linkMerge: merge_flattened
+        source: xam_to_interleaved_fq/ifastqs_out
       output_chksum_results:
-        source: [chksum/chksum_json]
-        linkMerge: merge_flattened
+        source: out_chksum/chksum_json
+      output_rg_info_file:
+        source: xam_to_interleaved_fq/rg_info_json
     out: [out_string]
     run: results_manifest.cwl
   
@@ -92,7 +110,7 @@ steps:
     run: string_to_file.cwl
 
 doc: |
-  A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
+  A workflow to generate checksums of [B|Cr]am files and interleaved FastQs derived from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
@@ -105,9 +123,10 @@ s:license: https://spdx.org/licenses/AGPL-3.0
 
 s:author:
   - class: s:Person
-    s:email: mailto:yyaobo@gmail.com
-    s:name: Yaobo Xu
+    s:identifier: https://orcid.org/0000-0002-0407-0386
+    s:email: mailto:drj@sanger.ac.uk
+    s:name: David Jones
 
 dct:creator:
-  foaf:name: Yaobo Xu
+  foaf:name: David Jones
   foaf:mbox: "genservhelp@sanger.ac.uk"
