@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.3.1
+
+* updated version of dockstore-samtools-biobambam2 to avoid CWL hated characters in file names in the middle of the workflow.
+
 ## 0.3.0
 
 * added workflow `chksum_xam_to_interleaved_fq`, which can split reads in a [B|Cr]am file into gzipped fastq files by read groups and preserved some RG tags in a json file.
