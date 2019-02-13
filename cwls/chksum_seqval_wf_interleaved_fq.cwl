@@ -37,22 +37,22 @@ outputs:
 
   interleaved_fastq_out:
     type: File
-    outputSource: rename/outfile
+    outputSource: copy_or_convert/outfile
   
   results_manifest:
     type: File
     outputSource: manifest_string_to_file/outfile
 
 steps:
-  rename:
+  copy_or_convert:
     in:
       srcfile:
         source: fastq_in
       newname:
         source: fastq_in
-        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz)?$/i, "")).fq.gz
+        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz|\.bz2)?$/i, "")).fq.gz
     out: [outfile]
-    run: rename.cwl
+    run: copy_or_convert.cwl
 
   chksum:
     in:
@@ -76,7 +76,7 @@ steps:
         source: [chksum/chksum_json]
         linkMerge: merge_flattened
       output_files:
-        source: [rename/outfile]
+        source: [copy_or_convert/outfile]
         linkMerge: merge_flattened
       output_chksum_results:
         source: [chksum/chksum_json]
