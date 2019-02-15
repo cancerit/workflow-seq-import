@@ -12,6 +12,7 @@ requirements:
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
   - class: MultipleInputFeatureRequirement
+  - class: SubworkflowFeatureRequirement
 
 inputs:
   fastq_in:
@@ -29,22 +30,22 @@ inputs:
 outputs:
   chksum_json:
     type: File
-    outputSource: chksum/chksum_json
+    outputSource: in_chksum/chksum_json
 
   chksum_put_server_response:
     type: ["null", File]
-    outputSource: chksum/server_response
+    outputSource: in_chksum/server_response
 
   interleaved_fastq_out:
     type: File
-    outputSource: copy_or_convert/outfile
+    outputSource: if_input_is_bz2_convert_to_gz_else_just_rename/outfile
   
   results_manifest:
     type: File
     outputSource: manifest_string_to_file/outfile
 
 steps:
-  copy_or_convert:
+  if_input_is_bz2_convert_to_gz_else_just_rename:
     in:
       srcfile:
         source: fastq_in
@@ -52,9 +53,9 @@ steps:
         source: fastq_in
         valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz|\.bz2)?$/i, "")).fq.gz
     out: [outfile]
-    run: copy_or_convert.cwl
+    run: toolkit/if_input_is_bz2_convert_to_gz_else_just_rename.cwl
 
-  chksum:
+  in_chksum:
     in:
       in_file:
         source: fastq_in
@@ -65,7 +66,20 @@ steps:
       ignore_all_curl_exits:
         valueFrom: $(true)
     out: [chksum_json, server_response]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+    # run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+    run: toolkit/chksum.cwl
+
+  if_input_is_bz2_generate_md5sum_else_return_input_chksum_json:
+    in:
+      in_1:
+        source: fastq_in
+        valueFrom: $(self.basename)
+      in_2:
+        source: if_input_is_bz2_convert_to_gz_else_just_rename/outfile
+      in_json:
+        source: in_chksum/chksum_json
+    out: [chksum_json]
+    run: toolkit/if_input_is_bz2_generate_md5sum_else_return_input_chksum_json.cwl
 
   results_manifest_string:
     in:
@@ -73,23 +87,23 @@ steps:
         source: [fastq_in]
         linkMerge: merge_flattened
       input_chksum_results:
-        source: [chksum/chksum_json]
+        source: [in_chksum/chksum_json]
         linkMerge: merge_flattened
       output_files:
-        source: [copy_or_convert/outfile]
+        source: [if_input_is_bz2_convert_to_gz_else_just_rename/outfile]
         linkMerge: merge_flattened
       output_chksum_results:
-        source: [chksum/chksum_json]
+        source: [if_input_is_bz2_generate_md5sum_else_return_input_chksum_json/chksum_json]
         linkMerge: merge_flattened
     out: [out_string]
-    run: results_manifest.cwl
+    run: toolkit/results_manifest.cwl
   
   manifest_string_to_file:
     in:
       in_string:
         source: [results_manifest_string/out_string]
     out: [outfile]
-    run: string_to_file.cwl
+    run: toolkit/string_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
