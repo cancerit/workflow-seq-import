@@ -14,10 +14,12 @@ inputs:
     type: File
     inputBinding:
       position: 1
+      shellQuote: true
   newname:
     type: string
     inputBinding:
       position: 2
+      shellQuote: true
 outputs:
   outfile:
     type: File

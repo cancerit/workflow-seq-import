@@ -41,4 +41,5 @@ steps:
       in_json:
         source: if_file_name_is_bz2_then_return_null_else_return_in_json_to_output/out_json
     out: [chksum_json]
-    run: chksum.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
+

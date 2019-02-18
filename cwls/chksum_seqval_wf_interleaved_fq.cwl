@@ -66,8 +66,7 @@ steps:
       ignore_all_curl_exits:
         valueFrom: $(true)
     out: [chksum_json, server_response]
-    # run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
-    run: toolkit/chksum.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
   if_input_is_bz2_generate_md5sum_else_return_input_chksum_json:
     in:

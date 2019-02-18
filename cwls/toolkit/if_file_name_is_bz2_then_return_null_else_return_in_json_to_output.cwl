@@ -9,10 +9,12 @@ inputs:
     type: string
     inputBinding:
       position: 1
+      shellQuote: true
   in_json:
     type: File
     inputBinding:
       position: 2
+      shellQuote: true
 outputs:
   out_json:
     type: ["null", File]
