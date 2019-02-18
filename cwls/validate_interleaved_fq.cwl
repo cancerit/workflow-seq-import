@@ -29,7 +29,7 @@ steps:
         source: [fastq_in]
         linkMerge: merge_flattened
     out: [report_json]
-    run: cgp-seqval-qc_pairs.cwl
+    run: toolkit/cgp-seqval-qc_pairs.cwl
 
 doc: |
   A workflow to copy the input interleaved fastq file to a new place and validate the file format and base quality score range. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.

@@ -65,7 +65,7 @@ steps:
       ignore_all_curl_exits:
         valueFrom: $(true)
     out: [chksum_json, server_response]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
   xam_to_interleaved_fq:
     in:
@@ -83,7 +83,7 @@ steps:
     scatter: [in_file]
     scatterMethod: dotproduct
     out: [chksum_json] #An array of chksums directly relating to the input array of interleaved fastq files
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
   results_manifest_string:
     in:
@@ -100,14 +100,14 @@ steps:
       output_rg_info_file:
         source: xam_to_interleaved_fq/rg_info_json
     out: [out_string]
-    run: results_manifest.cwl
+    run: toolkit/results_manifest.cwl
   
   manifest_string_to_file:
     in:
       in_string:
         source: [results_manifest_string/out_string]
     out: [outfile]
-    run: string_to_file.cwl
+    run: toolkit/string_to_file.cwl
 
 doc: |
   A workflow to generate checksums of [B|Cr]am files and interleaved FastQs derived from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
