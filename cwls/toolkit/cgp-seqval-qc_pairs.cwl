@@ -10,7 +10,7 @@ cwlVersion: v1.0
 
 requirements:
   - class: DockerRequirement
-    dockerPull: "quay.io/wtsicgp/dockstore-cgp-seqval:0.1.2"
+    dockerPull: "quay.io/wtsicgp/dockstore-cgp-seqval:0.1.3"
 
 inputs:
   fastqs_in:
