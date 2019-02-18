@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.3.2
+
+* `chksum_seqval_wf_paired_fq`, `chksum_xam_to_interleaved_fq` and `validate_interleaved_fq` workflows can now process bz2 compressed FastQ files.
+
 ## 0.3.1
 
 * updated version of dockstore-samtools-biobambam2 to avoid CWL hated characters in file names in the middle of the workflow.

@@ -24,7 +24,7 @@ These workflows were built based on existing tools below:
 
 #### Inputs
 
-* `fastq_in` - A gzipped interleaved FastQ file.
+* `fastq_in` - A gzip/bz2 compressed interleaved FastQ file.
 * `put_address` - An URL to send checksum results to via PUT. Optional.
 * `put_headers` - A list of headers to send with the checksum results to via PUT. Optional.
 
@@ -32,7 +32,7 @@ These workflows were built based on existing tools below:
 
 * `chksum_json` - A file with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - PUT server response in a text file. Optional, if no `put_address` is given.
-* `interleaved_fastq_out` - Interleaved gzipped FastQ output file.
+* `interleaved_fastq_out` - Interleaved gzip compressed FastQ output file.
 * `results_manifest` - A JSON file in the schema below:
 
     ```json
@@ -52,7 +52,7 @@ These workflows were built based on existing tools below:
 
 #### Inputs
 
-* `fastq_in` - A **list** of two paired gzipped FastQ files.
+* `fastq_in` - A **list** of two paired gzip/bz2 compressed FastQ files.
 * `put_address` - A **list** of two URLs to send checksum results of corresponding FasetQ to via PUT. It's required and **NOT** optional, but two empty strings can be used if no PUT is required.
 * `put_headers` - A list of headers to send with the checksum results to via PUT. Optional.
 
@@ -60,7 +60,7 @@ These workflows were built based on existing tools below:
 
 * `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - A list of two text files. Each has PUT server response of one of the `fastq_in`. Optional if empty `put_address` was used.
-* `interleaved_fastq_out` - Interleaved gzipped FastQ output file.
+* `interleaved_fastq_out` - Interleaved gzip compressed FastQ output file.
 * `results_manifest` - A JSON file in the schema below:
 
     ```json
@@ -90,7 +90,7 @@ These workflows were built based on existing tools below:
 
 * `chksum_json` - A list of two files with MD5 and SHA256 checksums of `fastq_in` in JSON format.
 * `chksum_server_response` - A list of two text files. Each has PUT server response of one of the `fastq_in`. Optional if empty `put_address` was used.
-* `interleaved_fastq_out` - Interleaved gzipped FastQ output files.
+* `interleaved_fastq_out` - Interleaved gzip compressed FastQ output files.
 * `results_manifest` - A JSON file in the schema below:
 
     ```json
@@ -112,7 +112,7 @@ These workflows were built based on existing tools below:
 
 #### Inputs
 
-* `fastq_in` - A gzipped interleaved FastQ file.
+* `fastq_in` - A gzip/bz2 compressed interleaved FastQ file.
 
 #### Outputs
 
@@ -123,18 +123,18 @@ These workflows were built based on existing tools below:
 Examples included in this repository.
 
 1. `examples/chksum_seqval_wf_interleaved_fq.json`
-   * A single interleaved gzipped fastq is presented and a PUT server URL as input.
+   * A single interleaved gzip compressed fastq is presented and a PUT server URL as input.
 
 1. `examples/chksum_seqval_wf_interleaved_fq_with_headers.json`
    * A list of headers is in the input.
    * PUT the results with headers.
 
 1. `examples/chksum_seqval_wf_interleaved_fq_no_put.json`
-   * Only a single interleaved gzipped fastq is presented.
+   * Only a single interleaved gzip compressed fastq is presented.
    * `put_address` is not presented nor the `chksum_server_response`.
 
 1. `examples/chksum_seqval_wf_paired_fq.json`
-   * A pair if read 1/2 gzipped fastq files are presented as input.
+   * A pair if read 1/2 gzip compressed fastq files are presented as input.
    * Two PUT server URLs are presented as input.
 
 1. `examples/chksum_seqval_wf_paired_fq_with_headers.json`
@@ -142,7 +142,7 @@ Examples included in this repository.
    * All headers will be used in every PUT request.
 
 1. `examples/chksum_seqval_wf_paired_fq_no_put.json`
-   * A pair if read 1/2 gzipped fastq files are presented as input.
+   * A pair if read 1/2 gzip compressed fastq files are presented as input.
    * Two empty strings are presented as input PUT server URLs.
    * `chksum_server_response` is not presented.
 
