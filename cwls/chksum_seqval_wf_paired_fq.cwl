@@ -67,7 +67,7 @@ steps:
     out: [chksum_json, server_response]
     scatter: [in_file, put_address]
     scatterMethod: dotproduct
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
   interleave:
     in:
@@ -76,14 +76,14 @@ steps:
       qc_pairs:
         valueFrom: $(1)
     out: [ifastq_out]
-    run: cgp-seqval-qc_pairs.cwl
+    run: toolkit/cgp-seqval-qc_pairs.cwl
 
   output_chksum:
     in:
       in_file:
         source: interleave/ifastq_out
     out: [chksum_json]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.0/Dockstore.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
   results_manifest_string:
     in:
@@ -98,14 +98,14 @@ steps:
         source: [output_chksum/chksum_json]
         linkMerge: merge_flattened
     out: [out_string]
-    run: results_manifest.cwl
+    run: toolkit/results_manifest.cwl
   
   manifest_string_to_file:
     in:
       in_string:
         source: [results_manifest_string/out_string]
     out: [outfile]
-    run: string_to_file.cwl
+    run: toolkit/string_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
