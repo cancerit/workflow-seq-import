@@ -76,7 +76,7 @@ steps:
       qc_pairs:
         valueFrom: $(1)
     out: [ifastq_out]
-    run: toolkit/cgp-seqval-qc_pairs.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-seqval/1.0.0/Dockstore.cwl
 
   output_chksum:
     in:
