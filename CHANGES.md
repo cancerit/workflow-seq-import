@@ -2,7 +2,7 @@
 
 ## 0.4.1
 
-* bumped into Dockstore bug: https://github.com/ga4gh/dockstore/issues/2154, so move all cwl files into one directory.
+* bumped into [Dockstore bug](https://github.com/ga4gh/dockstore/issues/2154), so moved all cwl files into one directory.
 
 ## 0.4.0
 
