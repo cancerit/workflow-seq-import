@@ -1,5 +1,13 @@
 # CHANGES
 
+## 0.4.1
+
+* bumped into [Dockstore bug](https://github.com/ga4gh/dockstore/issues/2154), so moved all cwl files into one directory.
+
+## 0.4.0
+
+* started to use remote dockstore-cgp-seqval 1.0.0 for its Casava 1.8 support.
+
 ## 0.3.2
 
 * `chksum_seqval_wf_paired_fq`, `chksum_xam_to_interleaved_fq` and `validate_interleaved_fq` workflows can now process bz2 compressed FastQ files.

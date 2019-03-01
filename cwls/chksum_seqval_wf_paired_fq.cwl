@@ -98,14 +98,14 @@ steps:
         source: [output_chksum/chksum_json]
         linkMerge: merge_flattened
     out: [out_string]
-    run: toolkit/results_manifest.cwl
+    run: results_manifest.cwl
   
   manifest_string_to_file:
     in:
       in_string:
         source: [results_manifest_string/out_string]
     out: [outfile]
-    run: toolkit/string_to_file.cwl
+    run: string_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.

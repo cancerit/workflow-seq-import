@@ -53,7 +53,7 @@ steps:
         source: fastq_in
         valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz|\.bz2)?$/i, "")).fq.gz
     out: [outfile]
-    run: toolkit/if_input_is_bz2_convert_to_gz_else_just_rename.cwl
+    run: if_input_is_bz2_convert_to_gz_else_just_rename.cwl
 
   in_chksum:
     in:
@@ -78,7 +78,7 @@ steps:
       in_json:
         source: in_chksum/chksum_json
     out: [chksum_json]
-    run: toolkit/if_input_is_bz2_generate_md5sum_else_return_input_chksum_json.cwl
+    run: if_input_is_bz2_generate_md5sum_else_return_input_chksum_json.cwl
 
   results_manifest_string:
     in:
@@ -95,14 +95,14 @@ steps:
         source: [if_input_is_bz2_generate_md5sum_else_return_input_chksum_json/chksum_json]
         linkMerge: merge_flattened
     out: [out_string]
-    run: toolkit/results_manifest.cwl
+    run: results_manifest.cwl
   
   manifest_string_to_file:
     in:
       in_string:
         source: [results_manifest_string/out_string]
     out: [outfile]
-    run: toolkit/string_to_file.cwl
+    run: string_to_file.cwl
 
 doc: |
   A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
