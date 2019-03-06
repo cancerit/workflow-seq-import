@@ -30,8 +30,12 @@ expression: |
       var metas = [];
       var corrupt_obj = JSON.parse(c_file.contents);
       for (var i=0; i<files.length; i++) {
-        var temp_obj = JSON.parse(chksum_out_json_files[i].contents);
-        metas.push({name: files[i].basename, size: files[i].size, md5: temp_obj.md5sum, sha2: temp_obj.sha2sum, corruption_status: corrupt_obj[files[i].basename]});
+        var chksum_obj = JSON.parse(chksum_out_json_files[i].contents);
+        var temp_obj = {name: files[i].basename, size: files[i].size, md5: chksum_obj.md5sum, sha2: chksum_obj.sha2sum, corruption_status: 'file name not found in corruption_status file'}
+        if (files[i].basename in corrupt_obj) {
+          temp_obj['corruption_status'] = corrupt_obj[files[i].basename]
+        }
+        metas.push(temp_obj);
       }
       return metas;
     }
