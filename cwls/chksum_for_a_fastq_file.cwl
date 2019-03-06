@@ -2,9 +2,9 @@
 
 class: Workflow
 
-id: "chksum-corrupted-files-workflow"
+id: "chksum-corrupted-single-file-workflow"
 
-label: "A CGP workflow to generate checksum and corruption info of files"
+label: "A CGP workflow to generate checksum and corruption info of a single file"
 
 cwlVersion: v1.0
 
@@ -14,17 +14,13 @@ requirements:
   - class: InlineJavascriptRequirement
 
 inputs:
-  files_in:
-    type:
-      type: array
-      items: File
-    doc: "input files"
+  fastq_in:
+    type: File
+    doc: "input file"
 
   put_address:
-    type:
-      type: array
-      items: ["null", string]
-    doc: "a list of PUT addresses to send checksums results, one for each input file. Use list of empty strings if no PUT is required."
+    type: string?
+    doc: "Optional PUT address to send JSON results of checksums"
 
   put_headers:
     type: string[]?
@@ -36,15 +32,11 @@ inputs:
 
 outputs:
   chksum_json:
-    type:
-      type: array
-      items: File
+    type: File
     outputSource: in_chksum/chksum_json
 
   chksum_put_server_response:
-    type:
-      type: array
-      items: ["null", File]
+    type: ["null", File]
     outputSource: in_chksum/server_response
   
   results_manifest:
@@ -56,7 +48,7 @@ steps:
   in_chksum:
     in:
       in_file:
-        source: files_in
+        source: fastq_in
       put_address:
         source: put_address
       put_headers:
@@ -64,16 +56,16 @@ steps:
       ignore_all_curl_exits:
         valueFrom: $(true)
     out: [chksum_json, server_response]
-    scatter: [in_file, put_address]
-    scatterMethod: dotproduct
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
   results_manifest_string:
     in:
       input_files:
-        source: [files_in]
+        source: [fastq_in]
+        linkMerge: merge_flattened
       input_chksum_results:
         source: [in_chksum/chksum_json]
+        linkMerge: merge_flattened
       corruption_status:
         source: corruption_status
     out: [out_string]
@@ -87,7 +79,7 @@ steps:
     run: string_to_file.cwl
 
 doc: |
-  A workflow to generate checksums a list of files and add info in corruption_status file into a JSON output. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
+  A workflow to generate checksums of a file and add info in corruption_status file into a JSON output. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
