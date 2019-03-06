@@ -105,7 +105,7 @@ steps:
     run: string_to_file.cwl
 
 doc: |
-  A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
+  A workflow to generate checksums of FastQ files and an interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
