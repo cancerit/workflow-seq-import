@@ -31,9 +31,17 @@ expression: |
       var corrupt_obj = JSON.parse(c_file.contents);
       for (var i=0; i<files.length; i++) {
         var chksum_obj = JSON.parse(chksum_out_json_files[i].contents);
-        var temp_obj = {name: files[i].basename, size: files[i].size, md5: chksum_obj.md5sum, sha2: chksum_obj.sha2sum, corruption_status: 'file name not found in corruption_status file'}
+        var temp_obj = {name: files[i].basename, size: files[i].size, md5: chksum_obj.md5sum, sha2: chksum_obj.sha2sum}
         if (files[i].basename in corrupt_obj) {
-          temp_obj['corruption_status'] = corrupt_obj[files[i].basename]
+          if ('compressed' in corrupt_obj[files[i].basename]) {
+            if ( !corrupt_obj[files[i].basename]['compressed'] || !corrupt_obj[files[i].basename]['expected_type'] ) {
+              temp_obj['corrupted'] = true
+            }
+          } else {
+            if ('expected_type' in corrupt_obj[files[i].basename] && !corrupt_obj[files[i].basename]['expected_type']) {
+              temp_obj['corrupted'] = true
+            }
+          }
         }
         metas.push(temp_obj);
       }
