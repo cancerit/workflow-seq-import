@@ -2,22 +2,21 @@
 
 class: Workflow
 
-id: "chksum-interleaved-seqval-workflow"
+id: "chksum-corrupted-single-file-workflow"
 
-label: "A CGP workflow to generate checksum of an interleaved fastq"
+label: "A CGP workflow to generate checksum and corruption info of a single file"
 
 cwlVersion: v1.0
 
 requirements:
+  - class: ScatterFeatureRequirement
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
-  - class: MultipleInputFeatureRequirement
-  - class: SubworkflowFeatureRequirement
 
 inputs:
   fastq_in:
     type: File
-    doc: "The gzipped interleaved fastq file to import."
+    doc: "input file"
 
   put_address:
     type: string?
@@ -25,7 +24,11 @@ inputs:
 
   put_headers:
     type: string[]?
-    doc: "Optional headers to send with JSON results"
+    doc: "Optional headers to send with JSON results."
+
+  corruption_status:
+    type: File
+    doc: "A JSON file of file corruption status"
 
 outputs:
   chksum_json:
@@ -35,25 +38,12 @@ outputs:
   chksum_put_server_response:
     type: ["null", File]
     outputSource: in_chksum/server_response
-
-  interleaved_fastq_out:
-    type: File
-    outputSource: if_input_is_bz2_convert_to_gz_else_just_rename/outfile
   
   results_manifest:
     type: File
     outputSource: manifest_string_to_file/outfile
 
 steps:
-  if_input_is_bz2_convert_to_gz_else_just_rename:
-    in:
-      srcfile:
-        source: fastq_in
-      newname:
-        source: fastq_in
-        valueFrom: $(self.basename.replace(/\.f(?:ast)?q(?:\.gz|\.bz2)?$/i, "")).fq.gz
-    out: [outfile]
-    run: if_input_is_bz2_convert_to_gz_else_just_rename.cwl
 
   in_chksum:
     in:
@@ -68,18 +58,6 @@ steps:
     out: [chksum_json, server_response]
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
-  if_input_is_bz2_generate_md5sum_else_return_input_chksum_json:
-    in:
-      in_1:
-        source: fastq_in
-        valueFrom: $(self.basename)
-      in_2:
-        source: if_input_is_bz2_convert_to_gz_else_just_rename/outfile
-      in_json:
-        source: in_chksum/chksum_json
-    out: [chksum_json]
-    run: if_input_is_bz2_generate_md5sum_else_return_input_chksum_json.cwl
-
   results_manifest_string:
     in:
       input_files:
@@ -88,15 +66,11 @@ steps:
       input_chksum_results:
         source: [in_chksum/chksum_json]
         linkMerge: merge_flattened
-      output_files:
-        source: [if_input_is_bz2_convert_to_gz_else_just_rename/outfile]
-        linkMerge: merge_flattened
-      output_chksum_results:
-        source: [if_input_is_bz2_generate_md5sum_else_return_input_chksum_json/chksum_json]
-        linkMerge: merge_flattened
+      corruption_status:
+        source: corruption_status
     out: [out_string]
-    run: results_manifest.cwl
-  
+    run: results_manifest_for_corrupted_input.cwl
+
   manifest_string_to_file:
     in:
       in_string:
@@ -105,7 +79,7 @@ steps:
     run: string_to_file.cwl
 
 doc: |
-  A workflow to generate checksums of FastQ files and an interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
+  A workflow to generate checksums of a file and add info in corruption_status file into a JSON output. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html

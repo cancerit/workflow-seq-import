@@ -2,9 +2,9 @@
 
 class: Workflow
 
-id: "chksum-paired-seqval-workflow"
+id: "chksum-corrupted-files-workflow"
 
-label: "CGP checksum and interleaved fastq generation workflow for a paired fastq"
+label: "A CGP workflow to generate checksum and corruption info of files"
 
 cwlVersion: v1.0
 
@@ -12,41 +12,40 @@ requirements:
   - class: ScatterFeatureRequirement
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
-  - class: MultipleInputFeatureRequirement
 
 inputs:
   fastq_in:
     type:
       type: array
       items: File
-    doc: "Gzipped fastq files to import."
+    doc: "input files"
 
   put_address:
     type:
       type: array
       items: ["null", string]
-    doc: "PUT address to send JSON results of checksums, use list of empty strings if no PUT is required."
+    doc: "a list of PUT addresses to send checksums results, one for each input file. Use list of empty strings if no PUT is required."
 
   put_headers:
     type: string[]?
     doc: "Optional headers to send with JSON results."
+
+  corruption_status:
+    type: File
+    doc: "A JSON file of file corruption status"
 
 outputs:
   chksum_json:
     type:
       type: array
       items: File
-    outputSource: input_chksum/chksum_json
+    outputSource: in_chksum/chksum_json
 
   chksum_put_server_response:
     type:
       type: array
       items: ["null", File]
-    outputSource: input_chksum/server_response
-
-  interleaved_fastq_out:
-    type: ["null", File]
-    outputSource: interleave/ifastq_out
+    outputSource: in_chksum/server_response
   
   results_manifest:
     type: File
@@ -54,7 +53,7 @@ outputs:
 
 steps:
 
-  input_chksum:
+  in_chksum:
     in:
       in_file:
         source: fastq_in
@@ -69,37 +68,17 @@ steps:
     scatterMethod: dotproduct
     run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
 
-  interleave:
-    in:
-      fastqs_in:
-        source: fastq_in
-      qc_pairs:
-        valueFrom: $(1)
-    out: [ifastq_out]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-seqval/1.0.0/Dockstore.cwl
-
-  output_chksum:
-    in:
-      in_file:
-        source: interleave/ifastq_out
-    out: [chksum_json]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-cgp-chksum/0.4.1/Dockstore.cwl
-
   results_manifest_string:
     in:
       input_files:
-        source: fastq_in
+        source: [fastq_in]
       input_chksum_results:
-        source: input_chksum/chksum_json
-      output_files:
-        source: [interleave/ifastq_out]
-        linkMerge: merge_flattened
-      output_chksum_results:
-        source: [output_chksum/chksum_json]
-        linkMerge: merge_flattened
+        source: [in_chksum/chksum_json]
+      corruption_status:
+        source: corruption_status
     out: [out_string]
-    run: results_manifest.cwl
-  
+    run: results_manifest_for_corrupted_input.cwl
+
   manifest_string_to_file:
     in:
       in_string:
@@ -108,7 +87,7 @@ steps:
     run: string_to_file.cwl
 
 doc: |
-  A workflow to generate checksums of FastQ files and a interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
+  A workflow to generate checksums a list of files and add info in corruption_status file into a JSON output. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
   - http://schema.org/docs/schema_org_rdfa.html
