@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.5.0
+
+* added workflows to generate chksums for files with corruption information added to the final manifest output.
+
 ## 0.4.1
 
 * bumped into [Dockstore bug](https://github.com/ga4gh/dockstore/issues/2154), so moved all cwl files into one directory.

@@ -118,6 +118,66 @@ These workflows were built based on existing tools below:
 
 * `report` - A json report evaluating the format and base quality of the input fastq.
 
+### Workflows for corrupted input
+
+* for interleaved FastQ files: chksum_for_a_corrupted_fastq_file.cwl
+* for paired FastQ files: chksum_for_corrupted_fastq_files.cwl
+* for [B|Cr]am: chksum_for_a_corrupted_xam_file.cwl
+
+**Note:** an un-compressed FastQ file will be recognised as "corrupted".
+
+These workflows are used to generate chksums for file/files that are determined as corrupted/un-compressed.
+
+They use the same inputs as the other FastQ/[B|Cr]am chksum workflows with an additional `corruption_status` input, which is a JSON output of one of [these 3 CWL tools used to detect corrupted Fastq/Xam files](#cwl-tools-for-detect-corrupted-files).
+
+They also have same outputs as other FastQ/[B|Cr]am chksum workflows, execpt that they don't have FastQ output and `results_manifest` file is in a slightly different schema, which has no `output` field and has a `corrupted` key for each file in `input`.
+
+An example of `results_manifest`:
+
+```json
+{
+    "input": [
+        {
+            "name": "corrupted_1.fastq.gz",
+            "size": 18817,
+            "md5": "26c72d0505e7fb709ad1349f57a5f2cc",
+            "sha2": "cbd8621106be9fb18cfa2f22cf76f59a0c7b8574d9635da6fd9b88f7da487ecf4c41d03a331aeb6abb691699fdccae7249e544cdeebb8f079a97ffc30c6594e7",
+            "corrupted": true
+        },
+        {
+            "name": "corrupted_2.fastq.gz",
+            "size": 18817,
+            "md5": "26c72d0505e7fb709ad1349f57a5f2cc",
+            "sha2": "cbd8621106be9fb18cfa2f22cf76f59a0c7b8574d9635da6fd9b88f7da487ecf4c41d03a331aeb6abb691699fdccae7249e544cdeebb8f079a97ffc30c6594e7",
+            "corrupted": true
+        }
+    ]
+}
+```
+
+## CWL tools for detect corrupted files
+
+* for interleaved FastQ files: if_a_fastq_is_corrupted.cwl
+* for paired FastQ files: if_fastqs_files_are_corrupted.cwl
+* for [B|Cr]am: if_a_xam_is_corrupted.cwl
+
+**Note:** an un-compressed FastQ file will be recognised as "corrupted".
+
+For input, they use the same inputs as their corresponded "good input" chksum workflows, but don't require `put_address` or `put_headers`.
+
+For output, they produce a JSON file similar to the example below (for a [B|Cr]am file, there's no `compressed` key):
+
+```json
+{
+    "interleave.fq.gz": {
+        "expected_type": true,
+        "compressed": true
+    }
+}
+```
+
+If any of the input file is corrupted/not expected file type, an extra empty file is produced, existence of which can be used as a flag for downstream CWL tools in a workflow.
+
 ## Examples
 
 Examples included in this repository.
