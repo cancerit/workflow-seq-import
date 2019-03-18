@@ -1,6 +1,6 @@
 # CHANGES
 
-## next
+## 0.5.0
 
 * added workflows to generate chksums for files with corruption information added to the final manifest output.
 
