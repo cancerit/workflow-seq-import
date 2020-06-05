@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.5.1
+
+* updated CWL file metadata schema IRI
+* updated `dockstore-cgp-seqval` to 1.5.4 and `dockstore-samtools-biobambam2` to 0.0.5, both of which also have the updated schema IRI.
+
 ## 0.5.0
 
 * added workflows to generate chksums for files with corruption information added to the final manifest output.
