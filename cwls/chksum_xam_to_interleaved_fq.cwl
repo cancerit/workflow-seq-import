@@ -74,7 +74,7 @@ steps:
       ref_path:
         source: cram_ref_url
     out: [ifastqs_out, rg_info_json]
-    run: https://raw.githubusercontent.com/cancerit/dockstore-samtools-biobambam2/0.0.4/cwls/xam_to_interleaved_by_rg.cwl
+    run: https://raw.githubusercontent.com/cancerit/dockstore-samtools-biobambam2/0.0.5/cwls/xam_to_interleaved_by_rg.cwl
 
   out_chksum:
     in: 
@@ -113,7 +113,7 @@ doc: |
   A workflow to generate checksums of [B|Cr]am files and interleaved FastQs derived from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
-  - http://schema.org/docs/schema_org_rdfa.html
+  - https://schema.org/version/latest/schema.rdf
 
 $namespaces:
   s: http://schema.org/

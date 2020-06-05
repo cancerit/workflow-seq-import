@@ -90,7 +90,7 @@ doc: |
   A workflow to generate checksums a list of files and add info in corruption_status file into a JSON output. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
-  - http://schema.org/docs/schema_org_rdfa.html
+  - https://schema.org/version/latest/schema.rdf
 
 $namespaces:
   s: http://schema.org/
