@@ -108,7 +108,7 @@ doc: |
   A workflow to generate checksums of FastQ files and an interleaved FastQ from them. See the [workflow-seq-import](https://github.com/cancerit/workflow-seq-import) website for more information.
 
 $schemas:
-  - http://schema.org/docs/schema_org_rdfa.html
+  - https://schema.org/version/latest/schema.rdf
 
 $namespaces:
   s: http://schema.org/
